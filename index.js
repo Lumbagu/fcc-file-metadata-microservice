@@ -1,20 +1,17 @@
-var express = require('express');
-var cors = require('cors');
-require('dotenv').config()
+require("dotenv").config()
 
-var app = express();
+const express = require("express");
+const app = express();
 
+const cors = require("cors");
 app.use(cors());
-app.use('/public', express.static(process.cwd() + '/public'));
 
-app.get('/', function (req, res) {
-  res.sendFile(process.cwd() + '/views/index.html');
+app.use(express.static("public"));
+
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + "/views/index.html");
 });
 
-
-
-
-const port = process.env.PORT || 3000;
-app.listen(port, function () {
-  console.log('Your app is listening on port ' + port)
-});
+const listener = app.listen(process.env.PORT || 3000, () => {
+    console.log(`Your app is listening on port ${listener.address().port}`);
+})
